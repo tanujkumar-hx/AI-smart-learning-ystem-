@@ -1,0 +1,899 @@
+{
+  "sessions": [
+    {
+      "id": "sess-1793500748030-134",
+      "code": "CS-62SH",
+      "title": "test",
+      "topic": "Data Structures & Algorithms",
+      "question_limit": 10,
+      "time_limit_minutes": 30,
+      "mode": "exam",
+      "question_ids": [
+        "dsa-1",
+        "dsa-2",
+        "dsa-3",
+        "dsa-4",
+        "dsa-5",
+        "dsa-6",
+        "dsa-7",
+        "dsa-8",
+        "dsa-9",
+        "dsa-10"
+      ],
+      "created_at": "2026-11-01T02:39:08.032Z"
+    }
+  ],
+  "questions": [
+    {
+      "id": "dsa-1",
+      "topic": "Data Structures & Algorithms",
+      "type": "mcq",
+      "title": "QuickSort vs MergeSort In-Place Efficiency",
+      "prompt": "Why is QuickSort typically preferred over MergeSort for sorting arrays in internal memory?",
+      "options": [
+        "QuickSort has better cache locality and requires O(1) auxiliary space",
+        "QuickSort has a guaranteed O(N log N) worst-case time complexity",
+        "MergeSort is non-deterministic and requires recursion limits",
+        "QuickSort does not require comparison operations"
+      ],
+      "correct_answer": "QuickSort has better cache locality and requires O(1) auxiliary space",
+      "misconception_key": "Students often focus only on theoretical worst-case time complexity, forgetting that MergeSort allocates an auxiliary array of size O(N), leading to cache misses and memory overhead.",
+      "core_concept": "In-place partition in QuickSort operates with O(1) extra space and exhibits superior CPU cache line utilization compared to MergeSort's extra array buffer allocation."
+    },
+    {
+      "id": "dsa-2",
+      "topic": "Data Structures & Algorithms",
+      "type": "mcq",
+      "title": "Binary Search Tree Worst-Case",
+      "prompt": "What is the worst-case search time complexity in an un-balanced Binary Search Tree (BST)?",
+      "options": [
+        "O(N)",
+        "O(log N)",
+        "O(N log N)",
+        "O(1)"
+      ],
+      "correct_answer": "O(N)",
+      "misconception_key": "Students often assume BST operations are always logarithmic O(log N), forgetting that inserting sorted keys creates a degenerate skewed tree resembling a linked list.",
+      "core_concept": "An unbalanced BST with N monotonically increasing elements degrades to a single line of height N, yielding O(N) search time."
+    },
+    {
+      "id": "dsa-3",
+      "topic": "Data Structures & Algorithms",
+      "type": "short_answer",
+      "title": "Hash Table Collisions",
+      "prompt": "Explain how Open Addressing with Linear Probing handles hash collisions, and name its primary drawback.",
+      "correct_answer": "When a collision occurs at index h, the algorithm sequentially probes h+1, h+2, etc., until an empty bucket is found. Its primary drawback is primary clustering.",
+      "misconception_key": "Students frequently confuse Open Addressing with Chaining (which uses linked lists at each bucket), or miss that consecutive filled slots form clusters.",
+      "core_concept": "Open Addressing places all keys directly inside the table array. Linear probing resolves collisions via (hash + i) % capacity, which suffers from primary clustering where long runs of occupied slots slow down lookups."
+    },
+    {
+      "id": "dsa-4",
+      "topic": "Data Structures & Algorithms",
+      "type": "code",
+      "title": "Valid Parentheses Check",
+      "prompt": "Write a function `isValid(s)` that returns true if bracket sequence `()[]{}` is balanced, false otherwise.",
+      "code_snippet": "function isValid(s) {\n  const stack = [];\n  const map = { ')': '(', '}': '{', ']': '[' };\n  for (let ch of s) {\n    if (map[ch]) {\n      if (stack.pop() !== map[ch]) return false;\n    } else {\n      stack.push(ch);\n    }\n  }\n  return stack.length === 0;\n}",
+      "correct_answer": "stack.length === 0",
+      "misconception_key": "Students commonly forget to verify that the stack is completely empty at the end, mistakenly accepting unmatched opening brackets like '(' as valid.",
+      "core_concept": "A Last-In-First-Out (LIFO) stack ensures every closing bracket matches the most recently opened unmatched counterpart, and the stack must be empty upon scanning."
+    },
+    {
+      "id": "dsa-5",
+      "topic": "Data Structures & Algorithms",
+      "type": "mcq",
+      "title": "Graph Cycle Detection",
+      "prompt": "Which traversal technique efficiently detects a cycle in a Directed Graph?",
+      "options": [
+        "DFS using 3 colors: white, gray, black (recursion stack tracking)",
+        "Simple BFS queue without tracking visited nodes",
+        "Kruskal's Algorithm without Union-Find",
+        "Dijkstra's shortest path"
+      ],
+      "correct_answer": "DFS using 3 colors: white, gray, black (recursion stack tracking)",
+      "misconception_key": "Students often believe finding ANY visited node in a directed graph indicates a cycle, confusing cross/forward edges with actual back-edges.",
+      "core_concept": "In directed graphs, a cycle exists if and only if DFS encounters a 'gray' node that is currently present in the active recursion call stack (back-edge)."
+    },
+    {
+      "id": "dsa-6",
+      "topic": "Data Structures & Algorithms",
+      "type": "mcq",
+      "title": "Dynamic Programming Memoization",
+      "prompt": "What is the defining characteristic that distinguishes Dynamic Programming from standard Divide and Conquer?",
+      "options": [
+        "Overlapping subproblems and optimal substructure",
+        "Sorting elements before dividing",
+        "Randomized pivot selection",
+        "Operating strictly in linear time"
+      ],
+      "correct_answer": "Overlapping subproblems and optimal substructure",
+      "misconception_key": "Students think divide and conquer cannot use recursion. In reality, both divide problems into subproblems, but DP caches solutions because the same subproblems reoccur repeatedly.",
+      "core_concept": "Divide and conquer (like MergeSort) solves disjoint subproblems; Dynamic Programming solves problems where subproblems overlap, allowing table or memo cache reuse."
+    },
+    {
+      "id": "dsa-7",
+      "topic": "Data Structures & Algorithms",
+      "type": "short_answer",
+      "title": "Dijkstra Negative Weights",
+      "prompt": "Why does Dijkstra's algorithm fail when an input graph contains edges with negative weights?",
+      "correct_answer": "Dijkstra is greedy and assumes once a node is visited/settled, its shortest path is final. Negative weights violate this monotonic distance increase assumption.",
+      "misconception_key": "Students think Dijkstra only fails on negative weight cycles. Even without cycles, a single negative edge can reveal a shorter path to a node already finalized.",
+      "core_concept": "Dijkstra greedily marks nodes as permanently visited. Bellman-Ford or SPFA must be used when negative edges are present because they relax all edges repeatedly."
+    },
+    {
+      "id": "dsa-8",
+      "topic": "Data Structures & Algorithms",
+      "type": "mcq",
+      "title": "Heap Insertion Complexity",
+      "prompt": "What is the time complexity to insert an element into a Binary Min-Heap containing N elements?",
+      "options": [
+        "O(log N)",
+        "O(1)",
+        "O(N)",
+        "O(N log N)"
+      ],
+      "correct_answer": "O(log N)",
+      "misconception_key": "Students mistake finding the minimum (O(1)) with inserting, which requires bubbling up to the tree height log N.",
+      "core_concept": "Insertion appends to the array end and sifts up along the tree height, which is bounded by O(log N)."
+    },
+    {
+      "id": "dsa-9",
+      "topic": "Data Structures & Algorithms",
+      "type": "mcq",
+      "title": "Trie (Prefix Tree) Lookup",
+      "prompt": "What is the time complexity to search for a word of length K in a Trie with N stored words?",
+      "options": [
+        "O(K)",
+        "O(N)",
+        "O(N * K)",
+        "O(log N)"
+      ],
+      "correct_answer": "O(K)",
+      "misconception_key": "Students assume lookup depends on the number of stored words N, forgetting that Trie search traverses strictly character by character along word length K.",
+      "core_concept": "Tries index by character transitions. A word lookup takes O(K) where K is string length, completely independent of total stored dictionary size N."
+    },
+    {
+      "id": "dsa-10",
+      "topic": "Data Structures & Algorithms",
+      "type": "short_answer",
+      "title": "Amortized Analysis of Dynamic Array",
+      "prompt": "Explain why pushing N elements into a dynamic array (like std::vector or ArrayList) has O(1) amortized time per insertion.",
+      "correct_answer": "Because the array doubles its capacity whenever full, resizing costs are paid infrequently; N insertions cause O(N) total copying work across all doublings, averaging O(1) per push.",
+      "misconception_key": "Students see the O(N) copy on resize and conclude worst-case means everyday push is O(N).",
+      "core_concept": "Geometric doubling distributes resize costs across all preceding insertions, ensuring total work for N elements is bounded by 2N, yielding O(1) amortized."
+    },
+    {
+      "id": "os-1",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "Deadlock Prevention: Circular Wait",
+      "prompt": "Which resource allocation policy strictly prevents deadlock by eliminating the Circular Wait condition?",
+      "options": [
+        "Impose a strict global linear ordering on all resource types",
+        "Allow preemption of currently held resources",
+        "Require processes to request all resources at once",
+        "Disable multi-threading on the CPU"
+      ],
+      "correct_answer": "Impose a strict global linear ordering on all resource types",
+      "misconception_key": "Students frequently confuse the 4 Coffman conditions: preemption attacks 'No Preemption', while linear ordering uniquely prevents 'Circular Wait'.",
+      "core_concept": "If resources are numbered 1..M and processes can only request resources with an index strictly higher than what they hold, a directed cycle can never form in the resource allocation graph."
+    },
+    {
+      "id": "os-2",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "Process vs Thread Memory Layout",
+      "prompt": "What memory segment is uniquely allocated per thread within the same process?",
+      "options": [
+        "Thread Stack and Register Set",
+        "Heap and Global Variables",
+        "Code / Text segment",
+        "Virtual Memory Page Table"
+      ],
+      "correct_answer": "Thread Stack and Register Set",
+      "misconception_key": "Students often believe threads have separate heaps or memory spaces. All threads in a process share the same virtual address space, heap, and open file handles.",
+      "core_concept": "Each thread has its own call stack and program counter/registers to track independent function execution, but shares heap and data segments."
+    },
+    {
+      "id": "os-3",
+      "topic": "Operating Systems",
+      "type": "short_answer",
+      "title": "Context Switching Overhead",
+      "prompt": "Why is a process context switch significantly more expensive than a thread context switch?",
+      "correct_answer": "A process context switch requires flushing the TLB (Translation Lookaside Buffer) and switching virtual memory page tables, whereas threads share the same page table.",
+      "misconception_key": "Students usually focus only on saving CPU registers, overlooking the cost of invalidating the TLB cache and changing address space mappings.",
+      "core_concept": "Switching address spaces forces the CPU MMU to reload CR3/page directory and flushes cached virtual-to-physical address translations in the TLB, incurring heavy memory latency."
+    },
+    {
+      "id": "os-4",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "Belady's Anomaly",
+      "prompt": "Which page replacement algorithm can suffer from Belady's Anomaly (where increasing the page frames increases page faults)?",
+      "options": [
+        "FIFO (First-In, First-Out)",
+        "LRU (Least Recently Used)",
+        "Optimal Page Replacement",
+        "LFU with aging"
+      ],
+      "correct_answer": "FIFO (First-In, First-Out)",
+      "misconception_key": "Students think LRU has Belady's anomaly. In fact, LRU and Optimal are stack algorithms and are mathematically immune to it.",
+      "core_concept": "Stack algorithms guarantee that the set of pages in an n-frame system is always a subset of pages in an (n+1)-frame system. FIFO does not satisfy this property."
+    },
+    {
+      "id": "os-5",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "Semaphore vs Mutex",
+      "prompt": "What is a key functional difference between a binary Semaphore and a Mutex?",
+      "options": [
+        "A Mutex has ownership semantics; only the locking thread may unlock it",
+        "A Semaphore cannot be used for signaling across threads",
+        "A Mutex can have a count greater than 1",
+        "A Semaphore runs only in hardware kernel mode"
+      ],
+      "correct_answer": "A Mutex has ownership semantics; only the locking thread may unlock it",
+      "misconception_key": "Students assume a Mutex is merely a semaphore initialized to 1. A Mutex enforces thread ownership and enables priority inheritance to combat priority inversion.",
+      "core_concept": "Ownership means the thread that acquired the mutex must be the one to release it. Semaphores are signaling variables where Thread A can signal (V) a semaphore waited (P) by Thread B."
+    },
+    {
+      "id": "os-6",
+      "topic": "Operating Systems",
+      "type": "short_answer",
+      "title": "Thrashing in Virtual Memory",
+      "prompt": "Define Thrashing in an operating system and state how the working set model resolves it.",
+      "correct_answer": "Thrashing occurs when the OS spends more time paging data between RAM and disk than executing user instructions. The working set model monitors pages actively used and suspends processes when total memory demands exceed available frames.",
+      "misconception_key": "Students think thrashing is CPU bottlenecking due to an infinite loop, rather than memory starvation causing continuous page faults.",
+      "core_concept": "When the sum of working set sizes of all active processes exceeds physical RAM frames, the system pages out needed pages immediately, causing cascading page faults."
+    },
+    {
+      "id": "os-7",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "Fork() and Copy-on-Write (COW)",
+      "prompt": "How does the OS optimize memory usage during a Unix `fork()` system call?",
+      "options": [
+        "Child shares parent pages marked read-only; copies page only upon write",
+        "Child immediately duplicates all physical RAM pages",
+        "Child process executes inside the parent stack",
+        "Child uses disk swap directly without RAM"
+      ],
+      "correct_answer": "Child shares parent pages marked read-only; copies page only upon write",
+      "misconception_key": "Students assume fork() duplicates all memory immediately, which would make execve() calls extremely inefficient.",
+      "core_concept": "Copy-on-Write marks shared pages as read-only. A page fault occurs only when either parent or child attempts a modification, triggering an isolated copy."
+    },
+    {
+      "id": "os-8",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "Zombie vs Orphan Process",
+      "prompt": "What is a Zombie process in Unix?",
+      "options": [
+        "A process that has finished execution but still has an entry in the process table",
+        "A process whose parent terminated while it is still running",
+        "A process stuck in an infinite sleep state",
+        "A process killed by SIGKILL"
+      ],
+      "correct_answer": "A process that has finished execution but still has an entry in the process table",
+      "misconception_key": "Students confuse Zombie (dead child waiting for parent `wait()`) with Orphan (alive child whose parent died, adopted by init/systemd).",
+      "core_concept": "A Zombie process retains its PID and exit status code in the process table until its parent reads it via wait()."
+    },
+    {
+      "id": "os-9",
+      "topic": "Operating Systems",
+      "type": "mcq",
+      "title": "CPU Scheduling Preemption",
+      "prompt": "Which of the following scheduling algorithms is strictly non-preemptive?",
+      "options": [
+        "FCFS (First-Come, First-Served)",
+        "Round Robin",
+        "Shortest Remaining Time First (SRTF)",
+        "Preemptive Priority Scheduling"
+      ],
+      "correct_answer": "FCFS (First-Come, First-Served)",
+      "misconception_key": "Students confuse SJF (can be non-preemptive or preemptive SRTF) with FCFS, which always runs processes to completion or I/O yield.",
+      "core_concept": "In FCFS, once the CPU is allocated to a process, it cannot be taken away until it terminates or requests I/O."
+    },
+    {
+      "id": "os-10",
+      "topic": "Operating Systems",
+      "type": "short_answer",
+      "title": "Kernel Mode vs User Mode",
+      "prompt": "Why does the CPU switch from User Mode to Kernel Mode during a system call, and what hardware mechanism facilitates this?",
+      "correct_answer": "To prevent user applications from directly accessing privileged hardware/memory; the CPU uses a software interrupt or trap instruction (like sysenter/syscall).",
+      "misconception_key": "Students think mode switching is a software function call, missing the hardware trap instruction that changes the processor privilege ring.",
+      "core_concept": "Ring 0 (kernel) has unrestricted hardware access. A trap switches CPU privilege level and jumps to a pre-configured interrupt descriptor table (IDT) handler."
+    },
+    {
+      "id": "dbms-1",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "ACID Properties: Isolation",
+      "prompt": "Which ACID property guarantees that concurrent execution of transactions leaves the database in the same state as if they were executed sequentially?",
+      "options": [
+        "Isolation",
+        "Atomicity",
+        "Consistency",
+        "Durability"
+      ],
+      "correct_answer": "Isolation",
+      "misconception_key": "Students confuse Consistency (maintaining schema rules and constraints) with Isolation (handling concurrency anomalies like dirty reads and phantom rows).",
+      "core_concept": "Isolation prevents concurrent transactions from interfering with one another through concurrency control techniques like 2-Phase Locking (2PL) or Multi-Version Concurrency Control (MVCC)."
+    },
+    {
+      "id": "dbms-2",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "B+ Tree Indexing Advantage",
+      "prompt": "Why are B+ Trees preferred over standard B-Trees for database storage engines?",
+      "options": [
+        "Data records are only in leaf nodes, linked sequentially for rapid range queries",
+        "B+ Trees have a smaller depth than any binary search tree",
+        "B+ Trees consume less RAM because keys are never duplicated",
+        "B+ Trees eliminate disk I/O operations entirely"
+      ],
+      "correct_answer": "Data records are only in leaf nodes, linked sequentially for rapid range queries",
+      "misconception_key": "Students think B+ Trees only save memory. The key advantage is that internal nodes store only routing keys (allowing huge fanout) and leaves form a linked list for range scans.",
+      "core_concept": "Keeping data pointers exclusively in leaves allows non-leaf nodes to fit many more routing keys per disk block (high fanout), reducing tree height to 3-4 levels."
+    },
+    {
+      "id": "dbms-3",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "short_answer",
+      "title": "Second Normal Form (2NF)",
+      "prompt": "State the requirement for a relation to be in 2NF, and explain what anomaly it prevents.",
+      "correct_answer": "The table must be in 1NF and have no partial dependencies (no non-prime attribute should depend on a proper subset of a composite candidate key). It prevents update/delete anomalies.",
+      "misconception_key": "Students often test for transitive dependencies (which is 3NF) instead of partial key dependencies.",
+      "core_concept": "2NF applies strictly to tables with composite primary keys. If attribute B depends on only part of the primary key {A, C}, it must be factored into a separate relation."
+    },
+    {
+      "id": "dbms-4",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "SQL Index Scan vs Index Seek",
+      "prompt": "What is the difference between an Index Seek and an Index Scan?",
+      "options": [
+        "Seek navigates the tree to pinpoint specific keys; Scan reads through the leaf pages",
+        "Scan is always faster than Seek because it reads in memory",
+        "Seek is only used when no WHERE clause is provided",
+        "Index Scan cannot use clustered indexes"
+      ],
+      "correct_answer": "Seek navigates the tree to pinpoint specific keys; Scan reads through the leaf pages",
+      "misconception_key": "Students think using an index automatically means O(log N) lookup, forgetting an Index Scan reads all index rows when predicates aren't sargable.",
+      "core_concept": "Seek traverses the B-Tree root-to-leaf using search arguments (SARG). Scan walks the index pages sequentially like a full table scan."
+    },
+    {
+      "id": "dbms-5",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "Write-Ahead Logging (WAL)",
+      "prompt": "What is the primary guarantee provided by Write-Ahead Logging (WAL) in database crash recovery?",
+      "options": [
+        "Log records must be flushed to non-volatile disk before dirty data pages are written",
+        "Data pages are written directly to memory without disk buffers",
+        "Backups are generated every hour automatically",
+        "Indexes are rebuilt before each transaction commit"
+      ],
+      "correct_answer": "Log records must be flushed to non-volatile disk before dirty data pages are written",
+      "misconception_key": "Students assume database engines write modified table rows straight to disk upon commit. WAL flushes lightweight sequential log entries first to preserve Durability and Atomicity.",
+      "core_concept": "WAL ensures that during a power failure, uncommitted changes can be undone (Rollback) and committed changes written to cache can be redone (Redo) from the log."
+    },
+    {
+      "id": "dbms-6",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "short_answer",
+      "title": "Phantom Read vs Non-Repeatable Read",
+      "prompt": "Explain the difference between a Non-Repeatable Read and a Phantom Read in SQL transaction isolation levels.",
+      "correct_answer": "Non-repeatable read occurs when a re-read row has modified values. Phantom read occurs when a range query discovers new rows inserted by another committed transaction.",
+      "misconception_key": "Students confuse modifying existing rows (addressed by Repeatable Read via row locks) with inserting brand new rows matching a WHERE range (requiring Serializable range locks).",
+      "core_concept": "Repeatable Read locks existing rows in the query set. Serializable uses predicate or gap locks to prevent new rows from being inserted into the queried range."
+    },
+    {
+      "id": "dbms-7",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "Clustered vs Non-Clustered Index",
+      "prompt": "How many Clustered Indexes can exist on a single database table?",
+      "options": [
+        "Only 1",
+        "Up to 16",
+        "Unlimited",
+        "Equal to the number of columns"
+      ],
+      "correct_answer": "Only 1",
+      "misconception_key": "Students assume any indexed column can have its own clustered index. A table's physical data rows can only be sorted on disk in one physical order.",
+      "core_concept": "The clustered index defines the physical storage order of the actual table rows. Non-clustered indexes store separate B-Trees whose leaf nodes point to the clustered index key."
+    },
+    {
+      "id": "dbms-8",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "SQL NULL Comparison",
+      "prompt": "What is the result of evaluating the SQL predicate `NULL = NULL`?",
+      "options": [
+        "UNKNOWN (neither TRUE nor FALSE)",
+        "TRUE",
+        "FALSE",
+        "Syntax Error"
+      ],
+      "correct_answer": "UNKNOWN (neither TRUE nor FALSE)",
+      "misconception_key": "Students expect NULL equals NULL to be TRUE. In 3-valued SQL logic, NULL represents an unknown value, so comparing two unknowns yields UNKNOWN.",
+      "core_concept": "SQL uses Three-Valued Logic (TRUE, FALSE, UNKNOWN). Testing for nullability must use `IS NULL` or `IS NOT NULL`."
+    },
+    {
+      "id": "dbms-9",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "mcq",
+      "title": "Boyce-Codd Normal Form (BCNF)",
+      "prompt": "What condition must hold for every non-trivial functional dependency X -> Y in BCNF?",
+      "options": [
+        "X must be a Superkey",
+        "Y must be a Prime attribute",
+        "X and Y must be foreign keys",
+        "The table must not have composite keys"
+      ],
+      "correct_answer": "X must be a Superkey",
+      "misconception_key": "Students mix up 3NF and BCNF. 3NF allows Y to be a prime attribute even if X is not a superkey; BCNF strictly eliminates this exception.",
+      "core_concept": "BCNF is a stricter version of 3NF. For every dependency X -> Y, X MUST be a superkey of the relation."
+    },
+    {
+      "id": "dbms-10",
+      "topic": "Database Management Systems (DBMS)",
+      "type": "short_answer",
+      "title": "Optimistic vs Pessimistic Concurrency",
+      "prompt": "When is Optimistic Concurrency Control (OCC) preferred over Pessimistic Locking?",
+      "correct_answer": "OCC is preferred in low-contention environments with mostly read operations, avoiding locking overhead by validating transactions at commit time.",
+      "misconception_key": "Students think locking is always safer and better, missing that locks cause thread contention, deadlocks, and latency when conflicts are rare.",
+      "core_concept": "OCC executes changes without locks and checks if another transaction touched the record (via version timestamps) before committing. If conflicts are rare, throughput is much higher."
+    },
+    {
+      "id": "net-1",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "TCP 3-Way Handshake Purpose",
+      "prompt": "Why does TCP require a 3-way handshake (SYN, SYN-ACK, ACK) instead of just a 2-way handshake?",
+      "options": [
+        "To prevent old, delayed duplicate connection requests from establishing false sessions",
+        "To negotiate public encryption keys between client and server",
+        "To determine the physical MAC address of the gateway router",
+        "To measure bandwidth speed before transmitting packets"
+      ],
+      "correct_answer": "To prevent old, delayed duplicate connection requests from establishing false sessions",
+      "misconception_key": "Students think the 3rd ACK is redundant confirmation, unaware that without it, an old delayed SYN packet wandering the internet could trick a server into allocating resources.",
+      "core_concept": "Both sides must verify each other's Initial Sequence Number (ISN) and confirm bidirectional communication capability before allocating server buffers."
+    },
+    {
+      "id": "net-2",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "DNS Resolution Protocol",
+      "prompt": "Which transport protocol does standard DNS query resolution primarily use, and why?",
+      "options": [
+        "UDP port 53, because it minimizes latency with single-packet round trips",
+        "TCP port 80, because web browsers require HTTP encapsulation",
+        "ICMP, because DNS is a network layer diagnostic service",
+        "SCTP, because of multi-homing requirements"
+      ],
+      "correct_answer": "UDP port 53, because it minimizes latency with single-packet round trips",
+      "misconception_key": "Students assume reliable lookups require TCP connection handshakes. Standard DNS uses UDP for fast speed and switches to TCP only for zone transfers or responses > 512 bytes.",
+      "core_concept": "DNS lookups fit into a single request/response packet. The overhead of a 3-way TCP handshake would double web lookup latency."
+    },
+    {
+      "id": "net-3",
+      "topic": "Computer Networks",
+      "type": "short_answer",
+      "title": "HTTP/1.1 vs HTTP/2 Multiplexing",
+      "prompt": "What major performance problem in HTTP/1.1 does HTTP/2 binary framing multiplexing solve?",
+      "correct_answer": "Head-of-Line (HoL) blocking at the application/HTTP layer, allowing multiple concurrent requests and responses over a single TCP connection.",
+      "misconception_key": "Students confuse TCP-level packet loss HoL blocking (which HTTP/3 over QUIC solves) with HTTP-level request pipelining blocking.",
+      "core_concept": "In HTTP/1.1, responses on a single connection must arrive in the exact order requested. HTTP/2 interleaves binary frames for multiple streams over one TCP stream."
+    },
+    {
+      "id": "net-4",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "Subnetting CIDR Calculation",
+      "prompt": "How many usable host IP addresses are available in a `/26` IPv4 subnet?",
+      "options": [
+        "62",
+        "64",
+        "126",
+        "30"
+      ],
+      "correct_answer": "62",
+      "misconception_key": "Students calculate 2^(32-26) = 64 and forget to subtract 2 for the Network ID and Broadcast address.",
+      "core_concept": "32 - 26 = 6 host bits. 2^6 = 64 total addresses. Subtract 2 (the lowest address for the network wire and the highest for broadcast), leaving 62 usable hosts."
+    },
+    {
+      "id": "net-5",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "NAT (Network Address Translation) Mechanics",
+      "prompt": "How does Port Address Translation (PAT / NAT Overload) allow hundreds of internal devices to share a single public IP address?",
+      "options": [
+        "It maps each private IP and source port tuple to a unique source port on the public IP",
+        "It assigns each internal machine a different MAC address on the ISP router",
+        "It rotates the single public IP using round-robin DNS",
+        "It compresses IP packets into a single encrypted tunnel"
+      ],
+      "correct_answer": "It maps each private IP and source port tuple to a unique source port on the public IP",
+      "misconception_key": "Students think NAT modifies the payload data. PAT tracks connection states in a translation table by substituting source IP and ephemeral port numbers.",
+      "core_concept": "The router rewrites outbound packet headers with its public IP and an assigned port, reversing the mapping when return packets arrive from the internet."
+    },
+    {
+      "id": "net-6",
+      "topic": "Computer Networks",
+      "type": "short_answer",
+      "title": "TCP Congestion Control: AIMD",
+      "prompt": "Explain how Additive Increase / Multiplicative Decrease (AIMD) stabilizes network bandwidth utilization in TCP Reno.",
+      "correct_answer": "The congestion window increases linearly (additive) each RTT while no packets are lost, and cuts in half (multiplicative) upon packet loss to alleviate network congestion.",
+      "misconception_key": "Students think TCP increases window exponentially forever, confusing Slow Start with the steady-state Congestion Avoidance phase.",
+      "core_concept": "AIMD mathematically converges multiple competing TCP flows toward fairness and efficiency along the optimal bandwidth capacity line."
+    },
+    {
+      "id": "net-7",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "ARP (Address Resolution Protocol)",
+      "prompt": "What is the primary function of ARP in an IPv4 local area network?",
+      "options": [
+        "Resolve a known IP address to a physical MAC address",
+        "Assign dynamic IP addresses to new network hosts",
+        "Translate domain names to IP addresses",
+        "Encrypt packets passing through an ethernet switch"
+      ],
+      "correct_answer": "Resolve a known IP address to a physical MAC address",
+      "misconception_key": "Students confuse ARP with DHCP (which leases IP addresses) or DNS (which resolves human domain names).",
+      "core_concept": "Data link layer switches deliver frames based on 48-bit MAC addresses. ARP broadcasts a request on the local LAN asking which host owns the target IP."
+    },
+    {
+      "id": "net-8",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "SYN Flood Attack Mitigation",
+      "prompt": "What defense mechanism allows a server to resist TCP SYN flood attacks without allocating memory for half-open connections?",
+      "options": [
+        "SYN Cookies",
+        "BGP Anycast routing",
+        "Disabling TCP ACK packets",
+        "Using larger listen backlogs only"
+      ],
+      "correct_answer": "SYN Cookies",
+      "misconception_key": "Students think the only way is increasing queue size. SYN cookies encode the connection state cryptographically inside the sequence number, allocating zero server memory until ACK.",
+      "core_concept": "The server computes an Initial Sequence Number containing a timestamp and cryptographic hash. Only when the client sends back ACK(ISN+1) does the server verify and allocate a socket."
+    },
+    {
+      "id": "net-9",
+      "topic": "Computer Networks",
+      "type": "mcq",
+      "title": "HTTPS TLS Handshake",
+      "prompt": "In a modern TLS 1.3 handshake, what role does Asymmetric Cryptography play compared to Symmetric Cryptography?",
+      "options": [
+        "Asymmetric keys authenticate identity and establish a shared secret; Symmetric keys encrypt bulk payload data",
+        "Asymmetric keys encrypt every HTTP payload packet because they are faster",
+        "Symmetric keys are used solely for digital signatures and certificates",
+        "TLS 1.3 eliminates symmetric cryptography entirely"
+      ],
+      "correct_answer": "Asymmetric keys authenticate identity and establish a shared secret; Symmetric keys encrypt bulk payload data",
+      "misconception_key": "Students think RSA or ECC encrypts the entire webpage content. Public key cryptography is computationally heavy, so it is only used to negotiate a symmetric session key (AES-GCM).",
+      "core_concept": "Diffie-Hellman / ECDHE establishes a shared symmetric key with forward secrecy, and fast hardware-accelerated AES encrypts all application stream bytes."
+    },
+    {
+      "id": "net-10",
+      "topic": "Computer Networks",
+      "type": "short_answer",
+      "title": "OSI vs TCP/IP Model Layers",
+      "prompt": "Which three OSI layers are combined into the single Application layer of the 4-layer TCP/IP model?",
+      "correct_answer": "Application, Presentation, and Session layers.",
+      "misconception_key": "Students often include the Transport layer, but Transport (Layer 4) remains separate in both models.",
+      "core_concept": "The 7-layer OSI model separates Session (connection state) and Presentation (data encoding/encryption). The pragmatic TCP/IP model handles all of these within user application code."
+    },
+    {
+      "id": "oop-1",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Liskov Substitution Principle (LSP)",
+      "prompt": "According to the Liskov Substitution Principle (L in SOLID), which design violation occurs when a Square class inherits from a Rectangle class?",
+      "options": [
+        "Modifying square width alters its height, violating rectangle behavioral invariants",
+        "Square requires more memory than Rectangle",
+        "Square cannot inherit private fields from Rectangle",
+        "Rectangle cannot be made abstract"
+      ],
+      "correct_answer": "Modifying square width alters its height, violating rectangle behavioral invariants",
+      "misconception_key": "Students reason that 'a square is mathematically a rectangle', so inheritance must be valid. In software, behavior matters: callers expecting a Rectangle expect width and height to vary independently.",
+      "core_concept": "Subtypes must be substitutable for their base types without altering program correctness. Overriding setWidth to also change height violates caller expectations."
+    },
+    {
+      "id": "oop-2",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Dependency Inversion Principle (DIP)",
+      "prompt": "What does the Dependency Inversion Principle state?",
+      "options": [
+        "High-level modules should depend on abstractions, not on low-level concrete implementations",
+        "Classes should be closed for extension but open for modification",
+        "Every class must implement an interface for every method",
+        "Dependencies should be instantiated inside constructor bodies"
+      ],
+      "correct_answer": "High-level modules should depend on abstractions, not on low-level concrete implementations",
+      "misconception_key": "Students confuse Dependency Injection (the technique of passing dependencies into arguments) with Dependency Inversion (the architectural design principle of decoupling via abstractions).",
+      "core_concept": "High-level business logic must not depend on database or networking libraries. Both must depend on abstractions (interfaces) owned by the business layer."
+    },
+    {
+      "id": "oop-3",
+      "topic": "OOP & System Design",
+      "type": "short_answer",
+      "title": "CAP Theorem Tradeoffs",
+      "prompt": "In distributed system design under the CAP theorem, why can a distributed database never guarantee both Consistency and Availability during a Network Partition?",
+      "correct_answer": "When network communication between nodes breaks (Partition), a node must either reject writes to avoid inconsistent state (sacrificing Availability) or accept writes (sacrificing Consistency).",
+      "misconception_key": "Students think they can choose 'C and A' in a real distributed network. Network partitions are unavoidable in reality, so the only real choice is CP or AP when partitions occur.",
+      "core_concept": "If partitioned nodes cannot communicate, they cannot reach consensus on state updates. You either fail the request (CP) or serve stale/divergent data (AP)."
+    },
+    {
+      "id": "oop-4",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Consistent Hashing in Caching",
+      "prompt": "What problem does Consistent Hashing solve when distributed cache servers are added or removed?",
+      "options": [
+        "It ensures only K/N keys need to be remapped rather than remapping all keys",
+        "It encrypts cached data keys across servers",
+        "It guarantees zero cache misses under any load",
+        "It eliminates hash collisions completely"
+      ],
+      "correct_answer": "It ensures only K/N keys need to be remapped rather than remapping all keys",
+      "misconception_key": "Students assume standard hash(key) % N works for distributed caches. If N changes, nearly 100% of keys remap to different servers, causing a catastrophic cache stampede.",
+      "core_concept": "Consistent Hashing maps both keys and servers to a circular ring. Adding a server takes keys only from its immediate neighbor, leaving all other server assignments untouched."
+    },
+    {
+      "id": "oop-5",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Singleton Pattern Thread Safety",
+      "prompt": "Why is the Double-Checked Locking pattern used when implementing a Singleton in Java or C++?",
+      "options": [
+        "To avoid expensive synchronized lock overhead on every getInstance call after initialization",
+        "To allow multiple instances when memory is abundant",
+        "To prevent memory leaks from static variables",
+        "To serialize object instances to disk"
+      ],
+      "correct_answer": "To avoid expensive synchronized lock overhead on every getInstance call after initialization",
+      "misconception_key": "Students think synchronization is only checked once. Checking volatile instance without locking first, and only acquiring lock if null, optimizes high-throughput read calls.",
+      "core_concept": "Locking on every call creates a major performance bottleneck. Double-checked locking acquires the lock only on the very first instantiation."
+    },
+    {
+      "id": "oop-6",
+      "topic": "OOP & System Design",
+      "type": "short_answer",
+      "title": "Database Read Replicas vs Sharding",
+      "prompt": "What is the key difference between Database Replication (Read Replicas) and Database Sharding (Horizontal Partitioning)?",
+      "correct_answer": "Replication copies the complete dataset across multiple nodes to scale read throughput; Sharding splits the dataset by key across nodes to scale write throughput and storage.",
+      "misconception_key": "Students often think adding read replicas solves high write volume, overlooking that all writes still funnel through the single primary database node.",
+      "core_concept": "Replicas duplicate data for high availability and read scalability. Sharding divides massive datasets so each database shard owns a distinct slice of data and handles writes independently."
+    },
+    {
+      "id": "oop-7",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Factory vs Abstract Factory Pattern",
+      "prompt": "What is the fundamental difference between the Factory Method pattern and the Abstract Factory pattern?",
+      "options": [
+        "Factory Method creates a single product; Abstract Factory creates families of related products",
+        "Factory Method uses reflection; Abstract Factory uses composition",
+        "Factory Method cannot use interfaces",
+        "Abstract Factory requires static methods only"
+      ],
+      "correct_answer": "Factory Method creates a single product; Abstract Factory creates families of related products",
+      "misconception_key": "Students think Abstract Factory is just an abstract class with factory methods. It is an interface creating entire coordinated product families (e.g., MacButton + MacWindow vs WinButton + WinWindow).",
+      "core_concept": "Factory Method relies on inheritance to let subclasses decide which class to instantiate. Abstract Factory uses composition to produce interdependent object suites."
+    },
+    {
+      "id": "oop-8",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Message Queues: Backpressure & Decoupling",
+      "prompt": "In a microservices architecture, what is the primary role of a message broker like Kafka or RabbitMQ?",
+      "options": [
+        "Asynchronous decoupling and buffering load spikes (backpressure) between producers and consumers",
+        "Serving static frontend website assets",
+        "Replacing relational database storage for user queries",
+        "Executing real-time client side JavaScript"
+      ],
+      "correct_answer": "Asynchronous decoupling and buffering load spikes (backpressure) between producers and consumers",
+      "misconception_key": "Students think microservices should communicate directly via synchronous REST APIs, which causes cascading failures when downstream services lag.",
+      "core_concept": "Message queues decouple service availability. Producers publish events and proceed immediately, while consumers process messages at their own rate without crashing under traffic spikes."
+    },
+    {
+      "id": "oop-9",
+      "topic": "OOP & System Design",
+      "type": "mcq",
+      "title": "Rate Limiting: Token Bucket Algorithm",
+      "prompt": "Why is the Token Bucket algorithm widely preferred over a Fixed Window Counter for API rate limiting?",
+      "options": [
+        "It prevents traffic bursts at the edges of time window boundaries",
+        "It requires zero memory storage on the server",
+        "It only allows constant-speed requests with zero bursts allowed",
+        "It operates exclusively on the client device"
+      ],
+      "correct_answer": "It prevents traffic bursts at the edges of time window boundaries",
+      "misconception_key": "Students think Fixed Window is fine, forgetting that if a limit is 100/min, a user could send 100 at 0:59 and 100 at 1:01, yielding 200 requests within 2 seconds.",
+      "core_concept": "Token Bucket replenishes tokens at a continuous smooth rate. It allows controlled bursts up to bucket capacity while enforcing strict long-term rate limits."
+    },
+    {
+      "id": "oop-10",
+      "topic": "OOP & System Design",
+      "type": "short_answer",
+      "title": "Idempotency in API Design",
+      "prompt": "What does it mean for an API endpoint to be idempotent, and which HTTP methods are inherently idempotent?",
+      "correct_answer": "Making multiple identical requests has the same side effect as a single request. GET, PUT, DELETE, and HEAD are idempotent; POST is not.",
+      "misconception_key": "Students confuse idempotent with 'returns the exact same response'. Idempotency is about server state side effects, not response status codes.",
+      "core_concept": "Calling DELETE /items/1 twice will return 200 first and 404 second, but the server state remains unchanged after the first call, satisfying idempotency."
+    },
+    {
+      "id": "web-1",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "CORS (Cross-Origin Resource Sharing) Security",
+      "prompt": "Which entity enforces the Same-Origin Policy and CORS restrictions during web application requests?",
+      "options": [
+        "The Client Web Browser",
+        "The Target Backend Server",
+        "The DNS Gateway Router",
+        "The SSL Certificate Authority"
+      ],
+      "correct_answer": "The Client Web Browser",
+      "misconception_key": "Students often believe the server blocks incoming cross-origin requests. The browser sends the request (or OPTIONS preflight) and blocks the JavaScript client from reading the response if CORS headers are missing.",
+      "core_concept": "CORS is a browser security mechanism designed to protect users from malicious scripts on one origin stealing data from authenticated sessions on another origin."
+    },
+    {
+      "id": "web-2",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "JWT Authentication: Invalidation Challenge",
+      "prompt": "What is a major security challenge with stateless JSON Web Tokens (JWTs) stored on clients?",
+      "options": [
+        "They cannot be instantly revoked before expiration without maintaining a server-side blacklist",
+        "They cannot contain custom user payload data",
+        "They encrypt user passwords in plain text",
+        "They require an active database connection for every signature verification"
+      ],
+      "correct_answer": "They cannot be instantly revoked before expiration without maintaining a server-side blacklist",
+      "misconception_key": "Students assume logging out simply deletes the token from localStorage. If an attacker stole the token, it remains valid until its exp timestamp passes.",
+      "core_concept": "Because JWTs are self-contained and validated cryptographically via public key or secret signature, servers do not check state unless a shared redis blacklist or token version is tracked."
+    },
+    {
+      "id": "web-3",
+      "topic": "Web & Full Stack Systems",
+      "type": "short_answer",
+      "title": "SQL Injection Prepared Statements",
+      "prompt": "How do Parameterized Queries (Prepared Statements) fundamentally prevent SQL Injection attacks?",
+      "correct_answer": "By pre-compiling the SQL query structure and treating user input strictly as literal data parameters, never as executable SQL commands.",
+      "misconception_key": "Students think prepared statements just escape quote characters, when in fact the database parser separates query compilation from parameter substitution.",
+      "core_concept": "The SQL syntax tree is compiled first. User inputs are bound as values into pre-defined parameter slots, preventing input strings from altering query logic."
+    },
+    {
+      "id": "web-4",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "HTTP Status Code 401 vs 403",
+      "prompt": "What is the technical distinction between HTTP 401 Unauthorized and HTTP 403 Forbidden?",
+      "options": [
+        "401 means authentication is required or invalid; 403 means authenticated user lacks permission",
+        "401 means server error; 403 means client timeout",
+        "401 is only for API keys; 403 is only for session cookies",
+        "401 and 403 are synonymous in RFC 7231"
+      ],
+      "correct_answer": "401 means authentication is required or invalid; 403 means authenticated user lacks permission",
+      "misconception_key": "Students often use 401 for permission issues. 401 is 'Unauthenticated' (who are you?), while 403 is 'Forbidden' (I know who you are, but you cannot access this).",
+      "core_concept": "401 prompts the client to authenticate (with WWW-Authenticate header). 403 acknowledges credentials but denies authorization."
+    },
+    {
+      "id": "web-5",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "XSS vs CSRF Vulnerability",
+      "prompt": "What is the key mechanism of a Cross-Site Request Forgery (CSRF) attack?",
+      "options": [
+        "Tricking an authenticated victim's browser into executing an unwanted action on a trusted site",
+        "Injecting malicious JavaScript into the DOM to steal local storage tokens",
+        "Overloading the web server with high-volume TCP packets",
+        "Intercepting unencrypted Wi-Fi traffic"
+      ],
+      "correct_answer": "Tricking an authenticated victim's browser into executing an unwanted action on a trusted site",
+      "misconception_key": "Students confuse XSS (executing attacker JS in target site context) with CSRF (exploiting browser's automatic inclusion of session cookies on cross-origin requests).",
+      "core_concept": "CSRF exploits the browser automatically sending cookies with cross-site requests. SameSite cookie attributes and CSRF anti-forgery tokens defeat this."
+    },
+    {
+      "id": "web-6",
+      "topic": "Web & Full Stack Systems",
+      "type": "short_answer",
+      "title": "Virtual DOM Reconciliation in React",
+      "prompt": "How does the Virtual DOM diffing algorithm optimize UI updates in modern frontend libraries?",
+      "correct_answer": "It computes changes in an in-memory representation of the DOM tree and batches only the minimal set of real DOM mutations necessary.",
+      "misconception_key": "Students think the Virtual DOM is faster than direct native DOM operations. It is an abstraction that avoids unnecessary layout recalcs by batching updates.",
+      "core_concept": "Reading and mutating the real browser DOM triggers browser reflow and repaint. Diffing two lightweight JavaScript tree objects in memory and applying batched patch changes minimizes expensive layout passes."
+    },
+    {
+      "id": "web-7",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "Server-Side Rendering (SSR) vs CSR",
+      "prompt": "What is the primary benefit of Server-Side Rendering (SSR) compared to Client-Side Rendering (CSR)?",
+      "options": [
+        "Faster First Contentful Paint (FCP) and superior Search Engine Optimization (SEO)",
+        "Zero server CPU utilization",
+        "Eliminating the need for backend APIs",
+        "Instant client hydration without downloading JavaScript bundles"
+      ],
+      "correct_answer": "Faster First Contentful Paint (FCP) and superior Search Engine Optimization (SEO)",
+      "misconception_key": "Students assume SSR means the server does everything and client JavaScript is not downloaded. SSR renders the initial HTML for fast display, followed by hydration.",
+      "core_concept": "SSR generates full HTML on the server so search crawlers and users see content immediately, before client bundle execution completes."
+    },
+    {
+      "id": "web-8",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "WebSockets vs Server-Sent Events (SSE)",
+      "prompt": "When is Server-Sent Events (SSE) preferred over WebSockets?",
+      "options": [
+        "When the application only requires unidirectional server-to-client streaming over HTTP/2",
+        "When low-latency binary multiplayer gaming inputs are required",
+        "When browsers do not support HTTP",
+        "When client-to-server file uploads must be streamed in real-time"
+      ],
+      "correct_answer": "When the application only requires unidirectional server-to-client streaming over HTTP/2",
+      "misconception_key": "Students assume WebSockets is always the superior modern choice for everything real-time. SSE runs over standard HTTP, has automatic reconnection, and works through proxies cleanly for feeds.",
+      "core_concept": "WebSockets provides full-duplex TCP communication. SSE is simpler, built on standard HTTP streams, and ideal for one-way feeds like live dashboards or AI token streaming."
+    },
+    {
+      "id": "web-9",
+      "topic": "Web & Full Stack Systems",
+      "type": "mcq",
+      "title": "Browser Storage: Cookies vs LocalStorage",
+      "prompt": "Why should sensitive authentication session identifiers be stored in `HttpOnly` cookies rather than `localStorage`?",
+      "options": [
+        "`HttpOnly` cookies cannot be accessed by client-side JavaScript, mitigating XSS token theft",
+        "`localStorage` has a strict 4KB storage limit",
+        "`localStorage` is automatically transmitted with every HTTP request",
+        "`HttpOnly` cookies encrypt data on client disk"
+      ],
+      "correct_answer": "`HttpOnly` cookies cannot be accessed by client-side JavaScript, mitigating XSS token theft",
+      "misconception_key": "Students often store auth tokens in localStorage for convenience, leaving them completely vulnerable to `document.cookie` or XSS scripts stealing them.",
+      "core_concept": "The `HttpOnly` flag prevents `document.cookie` access from JavaScript, ensuring that even if an attacker achieves XSS execution, they cannot read the session cookie."
+    },
+    {
+      "id": "web-10",
+      "topic": "Web & Full Stack Systems",
+      "type": "short_answer",
+      "title": "Database N+1 Query Problem in ORMs",
+      "prompt": "Describe the N+1 query problem commonly encountered in ORMs and how eager loading solves it.",
+      "correct_answer": "Fetching 1 parent record and then issuing N individual database queries to fetch child relations. Eager loading (JOIN or WHERE IN) fetches all children in 1 or 2 batched queries.",
+      "misconception_key": "Students assume ORMs automatically generate optimal queries. Iterating through parent objects in a loop triggers separate lazy-load queries for every single iteration.",
+      "core_concept": "N+1 causes severe database round-trip latency. Using eager loading instructs the ORM to execute a single JOIN or secondary `WHERE parent_id IN (...)` batch query."
+    }
+  ],
+  "attendees": [
+    {
+      "id": "att-1793500785961-99",
+      "session_id": "sess-1793500748030-134",
+      "student_name": "Vijay",
+      "status": "in_progress",
+      "score": 0,
+      "answered_count": 1,
+      "joined_at": "2026-11-01T02:39:45.961Z",
+      "completed_at": null
+    }
+  ],
+  "submissions": [
+    {
+      "id": "sub-1793500806137-654",
+      "attendee_id": "att-1793500785961-99",
+      "question_id": "dsa-1",
+      "student_answer": "QuickSort has a guaranteed O(N log N) worst-case time complexity",
+      "is_correct": false,
+      "why_confused": "You selected \"QuickSort has a guaranteed O(N log N) worst-case time complexity\". Students often focus only on theoretical worst-case time complexity, forgetting that MergeSort allocates an auxiliary array of size O(N), leading to cache misses and memory overhead. ",
+      "score": 0,
+      "created_at": "2026-11-01T02:40:06.137Z"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Smart Learning System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .glass-card-glow {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <nav class="border-b border-white/10 bg-slate-900/60 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="showView('home')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/20 font-bold text-lg">
+          AI
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight gradient-text">AI Smart Learning System</span>
+          <span class="hidden md:inline-block ml-3 px-2 py-0.5 text-xs font-semibold rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            CS Practice & Exam Platform
+          </span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="openShareWebsiteModal()" class="px-3.5 py-2 text-sm font-semibold rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 transition flex items-center gap-1.5 shadow-sm">
+          <span>🔗 Share Website</span>
+        </button>
+        <button onclick="showView('practice')" class="px-4 py-2 text-sm font-semibold rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">
+          ⚡ Practice Arena
+        </button>
+        <button onclick="showView('admin')" class="px-4 py-2 text-sm font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 transition flex items-center gap-2">
+          <span>👑 Admin Center</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Dynamic View Container -->
+  <main id="app-root" class="flex-1 max-w-7xl w-full mx-auto p-6"></main>
+
+  <!-- Client-side SPA Application Logic -->
+  <script src="/app.js"></script>
+</body>
+</html>

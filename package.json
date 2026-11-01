@@ -1,0 +1,14 @@
+{
+  "name": "ai-smart-learning-system",
+  "version": "1.0.0",
+  "description": "AI Smart Learning System - Dual-Role Practice, Examination & AI Misconception Diagnostic Platform",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/db.test.js tests/questions.test.js tests/ai-diagnostics.test.js tests/sessions.test.js tests/server.test.js tests/e2e-flow.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
